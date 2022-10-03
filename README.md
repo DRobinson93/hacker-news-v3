@@ -1,3 +1,7 @@
+# Code Details
+
+This code uses React, Typescript and Tailwind. I made a spa that uses virtualization to recreate a read only version of https://news.ycombinator.com/. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

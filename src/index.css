@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .nav-link-w-hover {
+      @apply flex items-center gap-4 p-3 hover:bg-neutral-900 rounded-3xl;
+    }
+    .item-padding{
+        @apply p-1 px-2 sm:p-2 sm:px-4
+    }
+    .item{
+        @apply flex place-items-center hover:bg-neutral-900 border-y-[.5px] border-gray-500
+    }
+    .nav-link-with-icon-hover{
+        @apply text-base sm:text-lg md:text-xl
+    }
+}
