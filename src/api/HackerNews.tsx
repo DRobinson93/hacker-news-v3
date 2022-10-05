@@ -1,12 +1,27 @@
 import axios from 'axios';
 
-import {ItemData} from "./../types"
-
 export const BASE_URL = "https://hacker-news.firebaseio.com/v0";
 
 const hackerNewsAxios = axios.create({
     baseURL: BASE_URL
-  });
+});
+
+export interface ItemData{
+    id:number, 
+    index:number, 
+    data:ItemInfo
+}
+
+export interface ItemInfo{
+    id:number, 
+    by:string, 
+    score:number, 
+    time:number, //timestamp
+    title:string, 
+    type:string, 
+    url:string, 
+    kids?:number[]//comments
+}
 
 export async function getTopItems() : Promise<number[]>{
     return hackerNewsAxios

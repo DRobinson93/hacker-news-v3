@@ -1,19 +1,15 @@
-import {ItemData} from "./../types";
-import React, { useState } from 'react';
+import {ItemData} from "./../api/HackerNews";
 import { FaComment, FaHeart } from 'react-icons/fa';
 
-interface Props{
+interface ItemProps{
     style?:React.CSSProperties, 
     itemData:ItemData
 }
 
-export default function Item({itemData, style} : Props) {
+export default function Item({itemData, style} : ItemProps) {
     const itemInfo = itemData.data;
-    const formatDate = (unix_timestamp:number) => {
-        return new Date(unix_timestamp * 1000).toLocaleDateString("en-US")
-    }
-    const [numOfComments] = useState<number>(itemInfo.kids?.length || 0);
-    const [dateFormatted] = useState<string>(formatDate(itemInfo.time));
+    const numOfComments = itemInfo.kids?.length || 0;
+    const dateFormatted = new Date(itemInfo.time * 1000).toLocaleDateString("en-US");
 
     return (
         <div>
