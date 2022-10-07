@@ -2,16 +2,15 @@ import {
   Link, useLocation
 } from "react-router-dom";
 
-import { FaHome, FaClock, FaComment, FaQuestion, FaCode } from 'react-icons/fa';
+import { FaHome, FaInfo, FaCode, FaSmile } from 'react-icons/fa';
 
 const Nav =() =>{
     const location = useLocation();
 
     const navLinks : {path:string, name:string, icon:JSX.Element}[] = [
       {path:"/", name:"Home", icon:<FaHome/>}, 
-      {path:"/new", name:"New", icon:<FaClock/>}, 
-      {path:"/comment", name:"Comment", icon:<FaComment/>}, 
-      {path:"/ask", name:"Ask", icon:<FaQuestion/>}
+      {path:"/v4", name:"V4", icon:<FaSmile/>}, 
+      {path:"/about", name:"About", icon:<FaInfo/>}
     ]
     return(
         <nav className="p-1 md:p-2">

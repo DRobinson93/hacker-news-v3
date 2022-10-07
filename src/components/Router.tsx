@@ -1,29 +1,19 @@
 import Home from "./../screens/Home";
-import LimitedExample from "./../screens/LimitedExample";
+import VersionFour from "./../screens/VersionFour";
+import About from "./../screens/About";
 import PageNotFound from "./../screens/PageNotFound";
 import {
   createBrowserRouter,
-  RouterProvider, 
-  RouteObject
+  RouterProvider
 } from "react-router-dom";
 
-const routeObj : RouteObject[] = [
+const router = createBrowserRouter([
   { path: "/", element: <Home/> },
+  { path: "/v4", element: <VersionFour/> },
+  { path: "/about", element: <About/> },
   //handle 404s
   { path:'*', element:<PageNotFound/> }
-];
-
-//these screens just show a screen explaining this is a code example 
-//and the code is limited to just show the home screen in display mode
-const limitedExampleScreenPaths : string[] = ['/new', '/comment', '/ask'];
-limitedExampleScreenPaths.forEach(path => {
-  routeObj.push({
-    path, 
-    element:<LimitedExample/>
-  })
-});
-
-const router = createBrowserRouter(routeObj);
+]);
 
 export default function Router() {
     return (

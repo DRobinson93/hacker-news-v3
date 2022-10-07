@@ -41,3 +41,20 @@ export async function getItem(id:number, index:number) : Promise<ItemData>{
             });
         });
 }
+
+export async function getItemsInRange(itemIds:number[], startIndex:number, stopIndex:number) :  Promise<ItemData[]>{
+        const promises : Promise<ItemData>[] = [];
+        for(let i=startIndex;i<=stopIndex;i++){
+            //generate a list of promises that are hitting the items endpoint
+            if(itemIds[i] !== undefined){//do not load past the number of ids
+                promises.push(getItem(itemIds[i], i));
+            }
+        }
+
+        //wait on each promise to the items endpoint
+        return Promise.all(promises).then((itemDataArrays) => {
+            return itemDataArrays;
+        }).catch(()=>{
+            return Promise.reject([]);
+        });
+}

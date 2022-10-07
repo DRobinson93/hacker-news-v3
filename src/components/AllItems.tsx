@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
-
-
-import {getTopItems, getItem} from "./../api/HackerNews";
+import {getTopItems} from "./../api/HackerNews";
 import { FixedSizeList } from 'react-window';
 import InfiniteLoader  from 'react-window-infinite-loader';
 import Item from "./../components/Item";
 import Loading from "./../components/common/Loading"
 import PageTitleAndDescription from "./../components/common/PageTitleAndDescription";
-import {ItemData} from "./../api/HackerNews"
+import {ItemData, getItemsInRange} from "./../api/HackerNews"
 
 interface AllItemsProps{
     height: number, width: number
@@ -58,22 +55,11 @@ export default function AllItems({width, height} : AllItemsProps) {
             return;
         }
         setNextPageIsLoading(true)
-        //iterate from the max index loaded plus 1(since max id is already loaded) 
-        //to max index plus num to load at once
-        const promises : Promise<ItemData>[] = [];
         const newItemIndexsAndData = {...itemIndexesAndData};
-        for(let i=startIndex;i<=stopIndex;i++){
-            //generate a list of promises that are hitting the items endpoint
-            if(itemIds[i] !== undefined){//do not load past the number of ids
-                promises.push(getItem(itemIds[i], i));
-            }
-        }
-
-        //wait on each promise to the items endpoint
-        Promise.all(promises).then((itemDataArrays) => {
+        getItemsInRange(itemIds, startIndex, stopIndex).then(itemsInRange => {
             setNextPageIsLoading(false);
             //for each of these, update itemIdsAndData
-            itemDataArrays.forEach((itemData)=>{
+            itemsInRange.forEach((itemData)=>{
                 newItemIndexsAndData[itemData.index] = itemData
             })
             //call setItemIndexesAndData to load dom with the data for these items set
